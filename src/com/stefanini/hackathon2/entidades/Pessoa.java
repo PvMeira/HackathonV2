@@ -11,7 +11,6 @@ public class Pessoa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
 	private Integer idPessoa;
 	@Column(nullable = false)
 	private String nome;

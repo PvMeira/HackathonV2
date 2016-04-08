@@ -25,49 +25,71 @@
 							required="true" value="#{pessoaManagedBean.pessoa.nome}" />
 						<p:message for="nome" />
 
-						
+
 
 						<p:outputLabel for="buscarLivro" value="Titulo do Livro: " />
-						<p:selectOneMenu id="buscarLivro" value="#{livroManagedBean.listaDeLivrosCadastrados}"
+						<p:selectOneMenu id="buscarLivro"
+							value="#{livroManagedBean.listaDeLivrosCadastrados}"
 							effect="fold" editable="true">
-							<f:selectItem itemLabel="Select One" itemValue="livroManagedBean.livro.nome" />
-							<f:selectItems value="#{livroManagedBean.listaDeLivrosCadastrados}" />
+							<f:selectItem itemLabel="Select One"
+								itemValue="livroManagedBean.livro.nome" />
+							<f:selectItems
+								value="#{livroManagedBean.listaDeLivrosCadastrados}" />
 						</p:selectOneMenu>
 
 
 					</p:panelGrid>
-					
-					
+
+					<p:commandButton value="Salvar" process="@form"
+						update="@form tabelaDeEmprestimos"
+						action="#{emprestimoManagedBean.salvar()}" icon="fa fa-fw fa-save" />
+
+					<p:commandButton value="Limpar" process="@this" update="@form"
+						action="#{emprestimoManagedBean.limpar()}"
+						icon="fa fa-fw fa-eraser" />
+
 				</h:form>
+				<p:dataTable id="tabelaDeEmprestimos" var="emprestimo"
+					value="#{emprestimoManagedBean.listaDeEmprestimosCadastrados}"
+					empatyMessage="Não existe alugueis no momento"
+					style="padding-top:20px;">
+					<p:column headerText="ID">
+						<h:outputText value="#{emprestimo.idEmprestimo}" />
+					</p:column>
+
+					<p:column headerText="NomeLivro">
+						<h:outputText value="#{emprestimo.livro.Nome}" />
+					</p:column>
+
+					<p:column headerText="NomePessoa">
+						<h:outputText value="#{emprestimo.pessoa.Nome}" />
+					</p:column>
+
+					<p:column headerText="Data de Retirada">
+						<h:outputText value="#{emprestimo.dataSaida}" />
+					</p:column>
+
+					<p:column headerText="Data de Devolução">
+						<h:outputText value="#{emprestimo.dataEntrada}" />
+					</p:column>
+					<p:column header-Text="Ações" style="text-align: center"	>
+						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Devolução"
+							update="emprestimoForm"
+							action="#{emprestimoManagedBeans.setEmprestimo}" />
+						<p:commandButton icon="fa fa-fw fa-edit" title="Deletar Devolução"
+							update="tabelaDeEmprstimo emprestimoForm"
+							action="#{emprestimoManagedBeans.deletar(emprestimo)}" />
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+				</p:dataTable>
 			</p:layoutUnit>
 
 		</p:layout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	</ui:define>
 </ui:composition>
