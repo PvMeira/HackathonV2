@@ -19,6 +19,7 @@ public class Pessoa {
 	@Column(nullable = false)
 	private String telefone;
 
+
 	public Pessoa() {
 	}
 

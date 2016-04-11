@@ -53,6 +53,7 @@ public class Livro {
 	public void setPaginas(Integer paginas) {
 		this.paginas = paginas;
 	}
+	
 
 	@Override
 	public final int hashCode() {

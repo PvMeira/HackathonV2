@@ -18,20 +18,33 @@
 
 				<h:form id="emprestimoForm">
 					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
-					<p:panelGrid columns="3">
-
-						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório"
-							required="true" value="#{pessoaManagedBean.pessoa.nome}" />
-						<p:message for="nome" />
+					<p:panelGrid columns="5">
 
 
+						<p:outputLabel for="idPessoa" value="Nome das Pessoas: " />
 
-						<p:outputLabel for="buscarLivro" value="Titulo do Livro: " />
-						<p:selectOneMenu id="buscarLivro" value="#{livroManagedBean.listaDeLivrosCadastrados}"
-							effect="fold" editable="true">
-							<f:selectItem itemLabel="Select One" itemValue="livroManagedBean.livro.id" />
-							<f:selectItems value="#{livroManagedBean.listaDeLivrosCadastrados}" />
+						<p:selectOneMenu id="idPessoa" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.pessoa}" effect="fold">
+
+							<f:selectItem itemLabel="Selecione uma Pessoa" itemValue="" />
+
+							<f:selectItems itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"
+								var="pessoa"
+								value="#{pessoaManagedBean.listaDePessoasCadastradas}" />
+						</p:selectOneMenu>
+
+
+
+
+						<p:outputLabel for="idLivro" value="Titulo do Livro: " />
+
+						<p:selectOneMenu id="idLivro" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.livro}" effect="fold">
+
+							<f:selectItem itemLabel="Selecione um livro" itemValue="" />
+
+							<f:selectItems itemLabel="#{livro.nome}" itemValue="#{livro}"
+								var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}" />
 						</p:selectOneMenu>
 
 					</p:panelGrid>
@@ -45,41 +58,50 @@
 						icon="fa fa-fw fa-eraser" />
 
 				</h:form>
+				
 				<p:dataTable id="tabelaDeEmprestimos" var="emprestimo"
 					value="#{emprestimoManagedBean.listaDeEmprestimosCadastrados}"
 					empatyMessage="Não existe alugueis no momento"
 					style="padding-top:20px;">
+					
 					<p:column headerText="ID">
 						<h:outputText value="#{emprestimo.idEmprestimo}" />
 					</p:column>
 
 					<p:column headerText="NomeLivro">
-						<h:outputText value="#{emprestimo.livro.Nome}" />
+						<h:outputText value="#{emprestimo.livro.nome}" />
 					</p:column>
 
 					<p:column headerText="NomePessoa">
-						<h:outputText value="#{emprestimo.pessoa.Nome}" />
+						<h:outputText value="#{emprestimo.pessoa.nome}" />
 					</p:column>
 
 					<p:column headerText="Data de Retirada">
-						<h:outputText value="#{emprestimo.dataSaida}" />
+						<h:outputText value="" />
 					</p:column>
 
 					<p:column headerText="Data de Devolução">
-						<h:outputText value="#{emprestimo.dataEntrada}" />
+						<h:outputText value="" />
 					</p:column>
-					<p:column header-Text="Ações" style="text-align: center"	>
+					
+					<p:column header-Text="Ações" style="text-align: center">
+					
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Devolução"
 							update="emprestimoForm"
-							action="#{emprestimoManagedBeans.setEmprestimo}" />
+							action="#{emprestimoManagedBeans.emprestimo}" />
+							
 						<p:commandButton icon="fa fa-fw fa-edit" title="Deletar Devolução"
-							update="tabelaDeEmprstimo emprestimoForm"
+							update="tabelaDeEmprestimos emprestimoForm"
 							action="#{emprestimoManagedBeans.deletar(emprestimo)}" />
+							
 						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						
 							<p:commandButton value="Sim" type="button"
 								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								
 							<p:commandButton value="Não" type="button"
 								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								
 						</p:confirmDialog>
 					</p:column>
 				</p:dataTable>

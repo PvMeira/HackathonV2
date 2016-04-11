@@ -11,14 +11,15 @@ import javax.persistence.Persistence;
 @ApplicationScoped
 public class FabricaDeEntityManager {
 
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("Hackathon2Unit");
+	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("Hackathon2Unit");
 
-	@Produces @RequestScoped
+	@Produces
+	@RequestScoped
 	public EntityManager criarEntityManager() {
 		return factory.createEntityManager();
 	}
-	
-	public void fecharEntityManager(@Disposes EntityManager manager){
+
+	public void fecharEntityManager(@Disposes EntityManager manager) {
 		manager.close();
 	}
 }

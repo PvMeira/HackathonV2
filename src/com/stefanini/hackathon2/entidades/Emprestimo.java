@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,17 +19,20 @@ public class Emprestimo {
 	
 	private Integer idEmprestimo;
 	
-	@JoinColumn(name="Nome_Pessoa")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idPessoa")
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Pessoa pessoa;
 	
-	@JoinColumn(name="Livro_ID")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="idlivro")
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Livro livro;
 	
-	@Column(nullable = false)
+	@Convert(converter=LocalDateTimeConverter.class)
+	@Column
 	private LocalDateTime dataSaida;
-	@Column(nullable = false)
+	
+	@Convert(converter=LocalDateTimeConverter.class)
+	@Column
 	private LocalDateTime dataEntrada;
 	
 	
