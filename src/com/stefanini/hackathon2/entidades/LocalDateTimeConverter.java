@@ -2,12 +2,10 @@ package com.stefanini.hackathon2.entidades;
 
 import java.time.LocalDateTime;
 
-import javax.faces.convert.FacesConverter;
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import javax.persistence.Convert;
 
-@Converter(autoApply=true)
-@FacesConverter("conversorLocalDateToDate")
+@Convert
 public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, java.sql.Timestamp> {
 
 	@Override

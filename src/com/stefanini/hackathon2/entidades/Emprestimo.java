@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Emprestimo {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
@@ -23,7 +24,7 @@ public class Emprestimo {
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Pessoa pessoa;
 	
-	@JoinColumn(name="idlivro")
+	@JoinColumn(name="id_livro")
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Livro livro;
 	
@@ -64,6 +65,7 @@ public class Emprestimo {
 		return dataEntrada;
 	}
 	public void setDataEntrada(LocalDateTime dataEntrada) {
+		
 		this.dataEntrada = dataEntrada;
 	}
 	@Override

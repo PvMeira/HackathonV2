@@ -1,5 +1,6 @@
 package com.stefanini.hackathon2.servicos;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,6 +16,8 @@ public class EmprestimoServico {
 	@Transacional
 	public void salvar(Emprestimo emprestimo) {
 		if (emprestimo.getIdEmprestimo() == null) {
+			emprestimo.setDataEntrada(LocalDateTime.now());
+			emprestimo.setDataSaida(LocalDateTime.now());
 			repositorio.inserir(emprestimo);
 		} else {
 			repositorio.atualizar(emprestimo);
@@ -32,5 +35,4 @@ public class EmprestimoServico {
 		;
 	}
 
-	
 }
