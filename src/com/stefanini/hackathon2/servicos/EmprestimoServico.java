@@ -18,7 +18,7 @@ public class EmprestimoServico {
 	public void salvar(Emprestimo emprestimo) {
 		if (emprestimo.getIdEmprestimo() == null) {
 			emprestimo.setDataEntrada(LocalDateTime.now());
-			emprestimo.setDataSaida(LocalDateTime.now());
+			
 			repositorio.inserir(emprestimo);
 		} else {
 			repositorio.atualizar(emprestimo);

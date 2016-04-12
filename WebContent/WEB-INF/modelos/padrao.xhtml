@@ -57,8 +57,16 @@
 		<p:layoutUnit position="south" resizable="true" size="40" minSize="40"
 			maxSize="40" style="border: 0px solid white;">
 			<p:outputLabel style="font-size: 12px; float: right;"
-				value="Copyright 2016. Todos os Direitos reservados a Stefanini Hackathon2." />
+				value="Copyright 2016. Todos os Direitos reservados PvMeira" />
 		</p:layoutUnit>
+		<h:form>
+    <p:growl id="messages" showDetail="true" sticky="true" />
+ 
+    <p:idleMonitor timeout="9000">
+        <p:ajax event="idle" listener="#{idleMonitorView.onIdle}" update="messages" />
+        <p:ajax event="active" listener="#{idleMonitorView.onActive}" update="messages" />
+    </p:idleMonitor>
+</h:form>
 
 	</p:layout>
 

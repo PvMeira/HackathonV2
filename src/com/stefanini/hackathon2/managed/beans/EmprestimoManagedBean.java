@@ -14,7 +14,6 @@ import com.stefanini.hackathon2.util.Mensageiro;
 @ManagedBean
 @ViewScoped
 public class EmprestimoManagedBean {
-	
 
 	private Emprestimo emprestimo;
 	private List<Emprestimo> listaDeEmprestimoCadastrados;
@@ -68,23 +67,24 @@ public class EmprestimoManagedBean {
 	public void setEmprestimo(Emprestimo emprestimo) {
 		this.emprestimo = emprestimo;
 	}
+
 	public void finalizarEmprestimo(Emprestimo emprestimo) {
-		  emprestimo.setDataEntrada(LocalDateTime.now());
-		  servico.salvar(emprestimo);
-		 }
-		 
-		 public String getDiasEmAtraso(String dataRetiradaString, String dataEntregaString) {
-		  LocalDateTime localDateTimeRetirada;
-		  LocalDateTime localDateTimeEntrega = null;
-		  if(dataEntregaString.length() == 16) {
-		   localDateTimeEntrega = LocalDateTime.parse(dataEntregaString);
-		  }  
-		  try {
-		   localDateTimeRetirada = LocalDateTime.parse(dataRetiradaString);
-		   return String.valueOf(servico.calcIntervaloDias(localDateTimeRetirada, localDateTimeEntrega));
-		  } catch (Exception e) {
-		   return "0";
-		  }
-		 }
+		emprestimo.setDataSaida(LocalDateTime.now());
+		servico.salvar(emprestimo);
+	}
+
+	public String getDiasEmAtraso(String dataRetiradaString, String dataEntregaString) {
+		LocalDateTime localDateTimeRetirada;
+		LocalDateTime localDateTimeEntrega = null;
+		if (dataEntregaString.length() == 16) {
+			localDateTimeEntrega = LocalDateTime.parse(dataEntregaString);
+		}
+		try {
+			localDateTimeRetirada = LocalDateTime.parse(dataRetiradaString);
+			return String.valueOf(servico.calcIntervaloDias(localDateTimeRetirada, localDateTimeEntrega));
+		} catch (Exception e) {
+			return "0";
+		}
+	}
 
 }
