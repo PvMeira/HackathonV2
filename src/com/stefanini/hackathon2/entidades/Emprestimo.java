@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.stefanini.hackathon2.conversores.LocalDateTimeConverter;
+
 @Entity
 public class Emprestimo {
 	
