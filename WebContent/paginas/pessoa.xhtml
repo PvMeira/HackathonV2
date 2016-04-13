@@ -39,7 +39,13 @@
 							required="true" value="#{pessoaManagedBean.pessoa.telefone}" />
 						<p:message for="telefone" />
 
-						
+						<p:outputLabel for="email" value="E-mail" />
+						<p:inputMask maxlength="20" id="email"
+							requiredMessage="Campo obrigatório" required="true"
+							value="#{pessoaManagedBean.pessoa.eMail}" />
+						<p:message for="email" />
+
+
 
 					</p:panelGrid>
 
@@ -54,8 +60,8 @@
 					value="#{pessoaManagedBean.listaDePessoasCadastradas}"
 					emptyMessage="Não existe cadastro de pessoas no banco"
 					style="padding-top:20px;">
-					<p:column headerText="Id">
-						<h:outputText value="#{pessoa.idPessoa}" />
+					<p:column headerText="E-mail">
+						<h:outputText value="#{pessoa.eMail}" />
 					</p:column>
 					<p:column headerText="Nome">
 						<h:outputText value="#{pessoa.nome}" />
@@ -66,7 +72,7 @@
 					<p:column headerText="Telefone">
 						<h:outputText value="#{pessoa.telefone}" />
 					</p:column>
-					
+
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
 							update="pessoaForm"

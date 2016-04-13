@@ -46,9 +46,10 @@ public class LivroManagedBean {
 	}
 	
 	public List<Livro> getListaDeLivrosCadastrados() {
-		if (listaDeLivrosCadastrados == null) {
-			carregaListaDeLivros();
-		}
+		carregaListaDeLivros();
+//		if (listaDeLivrosCadastrados == null || listaDeLivrosCadastrados.isEmpty()) {
+//			carregaListaDeLivros();
+//		}
 		return listaDeLivrosCadastrados;
 	}
 	

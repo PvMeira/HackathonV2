@@ -18,98 +18,91 @@
 
 				<h:form id="emprestimoForm">
 					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" style="text-align: center;">
+
+						<p:outputLabel for="btnModalPessoa" value="Cliente:" />
+						<p:commandButton value="Buscar" id="btnModalPessoa"
+							oncomplete="PF('dialogPessoa').show();" />
+						<p:outputLabel for="btnModalPessoa" id="lblNomePessoa"
+							value="#{emprestimoManagedBean.emprestimo.pessoa.nome}" />
+						<ui:include src="popups/popup-selecionar-pessoa.xhtml" />
+
+						<p:outputLabel for="btnModalLivro" value="Livros:" />
+						<p:commandButton value="Buscar" id="btnModalLivro"
+							oncomplete="PF('dialogLivro').show();" />
+						<ui:include src="popups/popup-selecionar-livro.xhtml" />
+
+						<p:outputLabel for="btnModalFuncionario" value="Funcionario:" />
+						<p:commandButton value="Buscar" id="btnModalFuncionario"
+							oncomplete="PF('dialogFuncionario').show();" />
+						<p:outputLabel for="btnModalFuncionario" id="lblNomeFuncionario"
+							value="#{emprestimoManagedBean.emprestimo.funcionario.nome}" />
+						<ui:include src="popups/popup-selecionar-funcionario.xhtml" />
 
 
-						<p:outputLabel for="idPessoa" value="Nome das Pessoas: " />
-
-						<p:selectOneMenu id="idPessoa" converter="conversorCombobox" requiredMessage="Campo obrigatório"  required="true"
-							value="#{emprestimoManagedBean.emprestimo.pessoa}" >
-
-							<f:selectItem itemLabel="Selecione uma Pessoa" itemValue="" />
-
-							<f:selectItems itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"
-								var="pessoa"
-								value="#{pessoaManagedBean.listaDePessoasCadastradas}" />
-						</p:selectOneMenu>
-
-
-
-
-						<p:outputLabel for="idLivro" value="Titulo do Livro: " />
-
-						<p:selectOneMenu id="idLivro" converter="conversorCombobox" requiredMessage="Campo obrigatório"  required="true"
-							value="#{emprestimoManagedBean.emprestimo.livro}" >
-
-							<f:selectItem itemLabel="Selecione um livro" itemValue="" />
-
-							<f:selectItems itemLabel="#{livro.nome}" itemValue="#{livro}"
-								var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}" />
-						</p:selectOneMenu>
 
 					</p:panelGrid>
 
 					<p:commandButton value="Salvar" process="@form"
 						update="@form tabelaDeEmprestimos"
 						action="#{emprestimoManagedBean.salvar()}" icon="fa fa-fw fa-save" />
-
 					<p:commandButton value="Limpar" process="@this" update="@form"
 						action="#{emprestimoManagedBean.limpar()}"
-								icon="fa fa-fw fa-eraser" />
-
+						icon="fa fa-fw fa-eraser" />
 				</h:form>
 
-				<p:dataTable id="tabelaDeEmprestimos" var="emprestimo"
-					value="#{emprestimoManagedBean.listaDeEmprestimosCadastrados}"
-					empatyMessage="Não existe alugueis no momento"
-					style="padding-top:20px;">
+				<div style="height: 250px; overflow: auto;">
+					<p:dataTable id="tabelaDeEmprestimos" var="emprestimo"
+						value="#{emprestimoManagedBean.listaDeEmprestimosCadastrados}"
+						emptyMessage="Não existem empréstimos cadastrados"
+						style="padding-top:20px;">
+						<p:column headerText="Id">
+							<h:outputText value="#{emprestimo.idEmprestimo}" />
+						</p:column>
 
-					<p:column headerText="ID" style="text-align: center">
-						<h:outputText value="#{emprestimo.idEmprestimo}" />
-					</p:column>
+						<p:column headerText="Pessoa">
+							<h:outputText value="#{emprestimo.pessoa.nome}" />
+						</p:column>
 
-					<p:column headerText="NomeLivro" style="text-align: center">
-						<h:outputText value="#{emprestimo.livro.nome}" />
-					</p:column>
+						<p:column headerText="Qtd. Livros">
+							<h:outputText value="#{emprestimo.livros.size()}" />
+						</p:column>
 
-					<p:column headerText="NomePessoa" style="text-align: center">
-						<h:outputText value="#{emprestimo.pessoa.nome}" />
-					</p:column>
+						<p:column headerText="Retirada">
+							<h:outputText converter="localDate"
+								value="#{emprestimo.dataEntrada}" />
+						</p:column>
 
-					<p:column headerText="Data de Retirada">
-						<h:outputText converter="localDate"
-							value="#{emprestimo.dataEntrada}" />
-					</p:column>
+						<p:column headerText="Entrega Efetiva">
+							<h:outputText converter="localDate"
+								value="#{emprestimo.dataSaida}" />
+						</p:column>
 
-					<p:column headerText="Data de Devolução">
-						<h:outputText converter="localDate"
-							value="#{emprestimo.dataSaida}" />
-					</p:column>
+						<p:column headerText="Dias em Atraso">
+							<h:outputText
+								value="#{emprestimoManagedBean.getDiasEmAtraso(emprestimo.dataEntrada, emprestimo.dataSaida)}" />
+						</p:column>
 
-					<p:column headerText="Dias de Atraso" style="text-align: center">
-						<h:outputText
-							value="#{emprestimoManagedBean.getDiasEmAtraso(emprestimo.dataSaida, emprestimo.dataEntrada)}" />
-					</p:column>
+						<p:column headerText="Ação" style="text-align: center">
+							<p:commandButton icon="fa fa-fw fa-archive" title="Devolução"
+								update="tabelaDeEmprestimos emprestimoForm"
+								action="#{emprestimoManagedBean.finalizarEmprestimo(emprestimo)}">
+								<p:confirm header="Confirmação" message="Finalizar empréstimo?"
+									icon="ui-icon-alert" />
+							</p:commandButton>
+							
 
-					<p:column headerText="Ações" style="text-align: center">
-						
-						<p:commandButton icon="fa fa-fw fa-archive"
-							title="Confirma devolução"
-							update="tabelaDeEmprestimos emprestimoForm"
-							action="#{emprestimoManagedBean.finalizarEmprestimo(emprestimo)}">
-							<p:confirm header="Confirmação"
-								message="Confirma a devolução do livro?" icon="ui-icon-alert" />
-						</p:commandButton>
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Sim" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="Não" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+						</p:column>
 
-						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-							<p:commandButton value="Sim" type="button"
-								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-							<p:commandButton value="Não" type="button"
-								styleClass="ui-confirmdialog-no " icon="ui-icon-close" style="float:right"/>
-						</p:confirmDialog>
-					</p:column>
-					
-				</p:dataTable>
+					</p:dataTable>
+				</div>
 			</p:layoutUnit>
 
 		</p:layout>

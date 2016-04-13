@@ -19,6 +19,8 @@ public class Pessoa {
 	@Column(nullable = false)
 	private String telefone;
 
+	@Column(nullable = false)
+	private String eMail;
 
 	public Pessoa() {
 	}
@@ -55,11 +57,20 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 
+	public String geteMail() {
+		return eMail;
+	}
+
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
 		result = prime * result + ((idPessoa == null) ? 0 : idPessoa.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
@@ -79,6 +90,11 @@ public class Pessoa {
 			if (other.cpf != null)
 				return false;
 		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (eMail == null) {
+			if (other.eMail != null)
+				return false;
+		} else if (!eMail.equals(other.eMail))
 			return false;
 		if (idPessoa == null) {
 			if (other.idPessoa != null)

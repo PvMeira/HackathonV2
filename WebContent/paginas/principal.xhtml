@@ -1,13 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<ui:composition template="/WEB-INF/modelos/padrao.xhtml">
-		<ui:define name="conteudo">
-		</ui:define>
-	</ui:composition>
-	
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+ 
+ 
+ <ui:composition template="/WEB-INF/modelos/homePadrao.xhtml">
+  <ui:define name="conteudo" >
+
+  <h:body>
+   <h:form style="margin-left:500px; margin-top:100px;">
+    <p:messages id="messages" />
+    
+    <p:panelGrid columns="2">
+    
+     <p:outputLabel for="user" value="Username:" />
+     <p:inputText id="user" requiredMessage="Campo obrigatório" value="#{loginManagedBeans.login.nameLogin}" />
+      
+
+     <p:outputLabel for="senha" value="Senha:" />
+     <p:password id="senha" value="#{loginManagedBeans.login.senha}" />
+
+     <p:commandButton value="Enviar" icon="ui-icon-star"
+      action="#{loginServico.login}" >
+     </p:commandButton>
+
+    </p:panelGrid>
+   </h:form>
+  </h:body>
+
+ </ui:define>
+ </ui:composition>
 </html>

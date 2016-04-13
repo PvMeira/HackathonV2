@@ -18,6 +18,8 @@ public class Livro {
 	private String autor;
 	@Column(nullable=false)
 	private Integer paginas;
+	@Column(nullable=false)
+	private Integer estoque;
 	
 	public Livro() {
 	}
@@ -53,13 +55,21 @@ public class Livro {
 	public void setPaginas(Integer paginas) {
 		this.paginas = paginas;
 	}
-	
+
+	public Integer getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Integer estoque) {
+		this.estoque = estoque;
+	}
 
 	@Override
-	public final int hashCode() {
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((paginas == null) ? 0 : paginas.hashCode());
@@ -67,7 +77,7 @@ public class Livro {
 	}
 
 	@Override
-	public final boolean equals(Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -79,6 +89,11 @@ public class Livro {
 			if (other.autor != null)
 				return false;
 		} else if (!autor.equals(other.autor))
+			return false;
+		if (estoque == null) {
+			if (other.estoque != null)
+				return false;
+		} else if (!estoque.equals(other.estoque))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -98,4 +113,5 @@ public class Livro {
 		return true;
 	}
 
+	
 }
