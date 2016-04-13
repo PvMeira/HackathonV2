@@ -29,6 +29,9 @@
 						<p:separator />
 						<p:menuitem value="Pessoas" icon="fa fa-fw fa-users"
 							url="/paginas/pessoa.xhtml" />
+						<p:separator />
+						<p:menuitem value="Funcionários" icon="fa fa-fw fa-suitcase"
+							url="/paginas/funcionario.xhtml" />
 					</p:submenu>
 
 					<p:submenu label="Movimentos" icon="fa fa-fw fa-refresh">
@@ -60,13 +63,15 @@
 				value="Copyright 2016. Todos os Direitos reservados PvMeira" />
 		</p:layoutUnit>
 		<h:form>
-    <p:growl id="messages" showDetail="true" sticky="true" />
- 
-    <p:idleMonitor timeout="11000">
-        <p:ajax event="idle" listener="#{idleMonitorView.onIdle}" update="messages" />
-        <p:ajax event="active" listener="#{idleMonitorView.onActive}" update="messages" />
-    </p:idleMonitor>
-</h:form>
+			<p:growl id="messages" showDetail="true" sticky="true" />
+
+			<p:idleMonitor timeout="11000">
+				<p:ajax event="idle" listener="#{idleMonitorView.onIdle}"
+					update="messages" />
+				<p:ajax event="active" listener="#{idleMonitorView.onActive}"
+					update="messages" />
+			</p:idleMonitor>
+		</h:form>
 
 	</p:layout>
 

@@ -30,6 +30,13 @@ public class Emprestimo {
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Livro livro;
 	
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "idFuncionario")
+	private Funcionario funcionario;
+	
+	@Column
+	private String status;
+	
 	@Convert(converter=LocalDateTimeConverter.class)
 	@Column
 	private LocalDateTime dataSaida;
@@ -37,50 +44,77 @@ public class Emprestimo {
 	@Convert(converter=LocalDateTimeConverter.class)
 	@Column
 	private LocalDateTime dataEntrada;
-	
-	
+
 	public Integer getIdEmprestimo() {
 		return idEmprestimo;
 	}
+
 	public void setIdEmprestimo(Integer idEmprestimo) {
 		this.idEmprestimo = idEmprestimo;
 	}
+
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
+
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+
 	public Livro getLivro() {
 		return livro;
 	}
+
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public LocalDateTime getDataSaida() {
 		return dataSaida;
 	}
+
 	public void setDataSaida(LocalDateTime dataSaida) {
 		this.dataSaida = dataSaida;
 	}
+
 	public LocalDateTime getDataEntrada() {
 		return dataEntrada;
 	}
+
 	public void setDataEntrada(LocalDateTime dataEntrada) {
-		
 		this.dataEntrada = dataEntrada;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dataEntrada == null) ? 0 : dataEntrada.hashCode());
 		result = prime * result + ((dataSaida == null) ? 0 : dataSaida.hashCode());
+		result = prime * result + ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + ((idEmprestimo == null) ? 0 : idEmprestimo.hashCode());
 		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,6 +134,11 @@ public class Emprestimo {
 				return false;
 		} else if (!dataSaida.equals(other.dataSaida))
 			return false;
+		if (funcionario == null) {
+			if (other.funcionario != null)
+				return false;
+		} else if (!funcionario.equals(other.funcionario))
+			return false;
 		if (idEmprestimo == null) {
 			if (other.idEmprestimo != null)
 				return false;
@@ -115,8 +154,15 @@ public class Emprestimo {
 				return false;
 		} else if (!pessoa.equals(other.pessoa))
 			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
 		return true;
 	}
+	
+	
 
 	
 

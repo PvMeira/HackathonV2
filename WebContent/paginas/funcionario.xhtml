@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/WEB-INF/modelos/padrao.xhtml">
+	<ui:define name="conteudo">
+
+		<p:layout>
+			<p:layoutUnit position="north" style="text-align: center;">
+				<p:outputLabel style="font-size: 20px;"
+					value="Manutenção de Emprestimo" />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center">
+
+				<h:form id="emprestimoForm">
+					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel for="idFuncionario" value="Nome do Funcionário: " />
+						<p:selectOneMenu id="idFuncionario" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.funcionario}">
+
+							<f:selectItem itemLabel="Selecione um funcionário" itemValue="" />
+
+							<f:selectItems itemLabel="#{funcionario.nome}"
+								itemValue="#{funcionario}" var="funcionario"
+								value="#{funcionarioManagedBean.listaDeFuncionariosCadastrados}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="idPessoa" value="Nome da Pessoa: " />
+						<p:selectOneMenu id="idPessoa" converter="conversorCombobox"
+							value="#{emprestimoManagedBean.emprestimo.pessoa}">
+
+							<f:selectItem itemLabel="Selecione uma pessoa" itemValue="" />
+
+							<f:selectItems itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"
+								var="pessoa"
+								value="#{pessoaManagedBean.listaDePessoasCadastradas}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="btnModalLivro" value="livro" />
+						<p:panel>
+							<p:panelGrid columns="1">
+								<p:commandButton for="idLivro" value="Selecionar Livros" id="btnModalLivro"
+								oncomplete="PF('dialogLivro').show();" />
+								<ui:repeat var="livro" value="#{emprestimoManagedBean.emprestimo.livros}">
+									<p:outputLabel value="#{livro.nome}" />
+									<br></br>
+								</ui:repeat>
+							</p:panelGrid>
+						</p:panel>
+
+					</p:panelGrid>
+
+					<ui:include src="livro_listaSelection.xhtml" />
+
+					<p:commandButton value="Alugar" process="@form"
+						update="@form tabelaDeEmprestimos"
+						action="#{emprestimoManagedBean.salvar()}" icon="fa fa-fw fa-save" />
+					<p:commandButton value="Limpar" process="@this" update="@form"
+						action="#{emprestimoManagedBean.limpar()}"
+						icon="fa fa-fw fa-eraser" />
+				</h:form>
+
+				<p:dataTable id="tabelaDeEmprestimos" var="emprestimo"
+					value="#{emprestimoManagedBean.listaDeEmprestimos}"
+					emptyMessage="Não existe emprestimos no banco"
+					style="padding-top:20px;">
+					<p:column headerText="Funcionário Responsável">
+						<h:outputText value="#{emprestimo.funcionario.nome}" />
+					</p:column>
+					<p:column headerText="Id">
+						<h:outputText value="#{emprestimo.idEmprestimo}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{emprestimo.pessoa.nome}" />
+					</p:column>
+					<p:column headerText="Telefone">
+						<h:outputText value="#{emprestimo.pessoa.telefone}" />
+					</p:column>
+					<p:column headerText="Titulo">
+						<h:outputText value="#{emprestimo.livro.nome}" />
+					</p:column>
+					<p:column headerText="Status">
+						<h:outputText value="#{emprestimo.status}" />
+					</p:column>
+					<p:column headerText="Data da Retirada">
+						<h:outputText converter="conversorDataFormatada"
+							value="#{emprestimo.dataRetirada}" />
+					</p:column>
+					<p:column headerText="Data da Devolução">
+						<h:outputText converter="conversorDataFormatada"
+							value="#{emprestimo.dataDevolucao}" />
+					</p:column>
+					<p:column headerText="Dias em Atraso">
+						<h:outputText value="#{emprestimo.diasAtrasados}" />
+					</p:column>
+					<p:column headerText="Ações" style="text-align: center">
+						<p:commandButton icon="fa fa-fw fa-book" title="Devolver Livro"
+							update="tabelaDeEmprestimos emprestimoForm"
+							rendered="#{emprestimo.status eq 'Alugado'}"
+							action="#{emprestimoManagedBean.devolver(emprestimo)}">
+							<p:confirm header="Confirmação"
+								message="Deseja devolver o Livro?" icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+					</p:column>
+				</p:dataTable>
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+	</ui:define>
+</ui:composition>
+
+</html>
