@@ -41,11 +41,17 @@
 							value="#{funcionarioManagedBean.funcionario.telefone}" />
 						<p:message for="telefone" />
 
-						<p:outputLabel for="mail" value="E-mail" />
-						<p:inputMask maxlength="100" id="mail"
-							requiredMessage="Campo obrigatório" required="true"
-							value="#{funcionarioManagedBean.funcionario.email}" />
-						<p:message for="mail" />
+						<p:outputLabel for="email" value="email" />
+						<p:inputText id="email" required="true" label="email"
+							requiredMessage="E-mail."
+							validatorMessage="Formato de email Invalido"
+							value="#{funcionarioManagedBean.funcionario.email}">
+
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+						</p:inputText>
+						<p:outputLabel></p:outputLabel>
 
 						<p:outputLabel for="salario" value="Salario:" />
 						<p:inputMask maxlength="50" id="salario"

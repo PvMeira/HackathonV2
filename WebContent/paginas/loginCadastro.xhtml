@@ -20,38 +20,41 @@
 				<h:form id="loginForm">
 					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="3">
 
 						<p:outputLabel for="nameLogin" value="Usuario:	" />
 						<p:inputText id="nameLogin" requiredMessage="Campo obrigatório"
 							required="true" value="#{loginManagedBean.login.nameLogin}" />
 						<p:message for="nameLogin" />
+					
+
+
+
+					<h:outputLabel for="senha1" value="Senha:" />
+					<p:password id="senha1" placeholder="Senha"
+						value="#{loginManagedBeans.login.senha}"
+						validatorMessage="Senhas devem ser iguais"
+						promptLabel="Use letras e números" match="senha2" label="Senha: "
+						required="true" feedback="true" inline="true" />
+					<p:outputLabel />
+
+					<h:outputLabel for="senha2" value="Repita a senha:" />
+					<p:password id="senha2" placeholder="Repita a senha"
+						value="#{loginManagedBeans.login.senha}" label="Repita a senha: "
+						required="true" feedback="true" inline="true" />
+					<p:outputLabel />
+
+					<p:outputLabel for="btnModalFuncionario" value="Funcionario:" />
+					<p:commandButton value="Buscar" id="btnModalFuncionario"
+						oncomplete="PF('dialogFuncionario').show();" />
+					<p:outputLabel for="btnModalFuncionario" id="lblNomeFuncionario"
+						value="#{funcionarioManagedBean.funcionario.nome}" />
+					<ui:include src="popups/popup-selecionar-funcionario-login.xhtml" />
 					</p:panelGrid>
 
 
-
-					<h:panelGrid columns="2" id="matchGrid" cellpadding="5">
-						<h:outputLabel for="senha" value="Digite a senha : *"
-							requiredMessage="Campo obrigatório" required="true" />
-						<p:password id="senha" value="#{loginManagedBean.login.senha}"
-							 />
-
-					</h:panelGrid>
-					<p:outputLabel for="idFuncionario" value="Nome do Funcionario: " />
-
-					<p:selectOneMenu id="idFuncionario" converter="conversorCombobox"
-						requiredMessage="Campo obrigatório" required="true"
-						value="#{emprestimoManagedBean.emprestimo.funcionario}">
-
-						<f:selectItem itemLabel="Selecione um Funcionario" itemValue="" />
-
-						<f:selectItems itemLabel="#{funcionario.nome}"
-							itemValue="#{funcionario}" var="funcionario"
-							value="#{funcionarioManagedBean.listaDeFuncionariosCadastrados}" />
-					</p:selectOneMenu>
-
 					<h:form>
-						<h:panelGrid columns="2" cellpadding="1">
+						<h:panelGrid columns="2" cellpadding="5">
 
 							<h:outputLabel for="menu" value="Permissões:" />
 

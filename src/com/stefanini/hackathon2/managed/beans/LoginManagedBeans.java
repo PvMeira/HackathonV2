@@ -75,9 +75,10 @@ public class LoginManagedBeans {
 	@PostConstruct
 	public void init() {
 		permissoes = new ArrayList<String>();
-		permissoes.add("CadastroLivro");
-		permissoes.add("CadastroCliente");
-		permissoes.add("CadastroEmprestimo");
+		permissoes.add("ADM");
+		permissoes.add("Bibliotecario");
+		permissoes.add("RegistroLivro");
+		permissoes.add("RegistroPessoa");
 
 	}
 

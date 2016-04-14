@@ -1,26 +1,32 @@
 package com.stefanini.hackathon2.entidades;
 
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Livro {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nome;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String autor;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer paginas;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Integer estoque;
-	
+	@Lob
+	@Column(nullable = true)
+	private Blob foto;
+
 	public Livro() {
 	}
 
@@ -64,12 +70,21 @@ public class Livro {
 		this.estoque = estoque;
 	}
 
+	public Blob getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Blob foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
 		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
+		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((paginas == null) ? 0 : paginas.hashCode());
@@ -95,6 +110,11 @@ public class Livro {
 				return false;
 		} else if (!estoque.equals(other.estoque))
 			return false;
+		if (foto == null) {
+			if (other.foto != null)
+				return false;
+		} else if (!foto.equals(other.foto))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -113,5 +133,4 @@ public class Livro {
 		return true;
 	}
 
-	
 }
