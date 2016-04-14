@@ -41,11 +41,11 @@
 							value="#{funcionarioManagedBean.funcionario.telefone}" />
 						<p:message for="telefone" />
 
-						<p:outputLabel for="endereco" value="Endereço:" />
-						<p:inputMask maxlength="100" id="endereco"
+						<p:outputLabel for="mail" value="E-mail" />
+						<p:inputMask maxlength="100" id="mail"
 							requiredMessage="Campo obrigatório" required="true"
-							value="#{funcionarioManagedBean.funcionario.endereco}" />
-						<p:message for="endereco" />
+							value="#{funcionarioManagedBean.funcionario.email}" />
+						<p:message for="mail" />
 
 						<p:outputLabel for="salario" value="Salario:" />
 						<p:inputMask maxlength="50" id="salario"
@@ -82,14 +82,14 @@
 					<p:column headerText="Telefone" style="text-align: center">
 						<h:outputText value="#{funcionario.telefone}" />
 					</p:column>
-					<p:column headerText="Endereço" style="text-align: center">
-						<h:outputText value="#{funcionario.endereco}" />
+					<p:column headerText="E-mail" style="text-align: center">
+						<h:outputText value="#{funcionario.email}" />
 					</p:column>
 					<p:column headerText="Salario" style="text-align: center">
 						<h:outputText value="#{funcionario.salario}" />
 					</p:column>
 
-					<p:column headerText="Ações" style="text-align: center" >
+					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
 							update="funcionarioForm"
 							action="#{funcionarioManagedBean.setFuncionario(funcionario)}" />

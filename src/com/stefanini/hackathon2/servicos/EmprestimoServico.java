@@ -1,6 +1,6 @@
 package com.stefanini.hackathon2.servicos;
 
-import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class EmprestimoServico {
 	@Transacional
 	public void salvar(Emprestimo emprestimo) {
 		if (emprestimo.getIdEmprestimo() == null) {
-			if (emprestimo.getStatus() == "DISPONIVEL") {
+			if (emprestimo.getStatus() == null) {
 				for (Livro confereEstoque : emprestimo.getLivros()) {
 					if (confereEstoque.getEstoque() <= 1) {
 						System.out.println("Desculpe mas o livro está sem exemplares");
@@ -38,8 +38,6 @@ public class EmprestimoServico {
 		}
 	}
 
-
-
 	@Transacional
 	public List<Emprestimo> carregarTodosEmprestimosDoBanco() {
 		return repositorio.todosEmprestimos();
@@ -48,27 +46,26 @@ public class EmprestimoServico {
 	@Transacional
 	public void deletar(Emprestimo emprestimo) {
 		repositorio.remover(emprestimo);
-		;
+
 	}
 
 	@Transacional
-	public int calcIntervaloDias(LocalDateTime begin, LocalDateTime end) {
-		LocalDateTime weekDay = begin;
-		Integer dayQuantity = 0;
-
-		if (end == null) {
-			end = LocalDateTime.now();
-		}
-
-		while (weekDay.isBefore(end)) {
-			if (weekDay.getDayOfWeek() == DayOfWeek.FRIDAY) {
-				weekDay = weekDay.plusDays(3);
-			} else {
-				weekDay = weekDay.plusDays(1);
+	public void devolver(Emprestimo emprestimo) {
+		if (emprestimo.getStatus() != null) {
+			emprestimo.setStatus(null);
+			emprestimo.setDataSaida(LocalDateTime.now());
+			Duration dur = Duration.between(emprestimo.getDataEntrada(), emprestimo.getDataSaida());
+			for (Livro livroAtribuirEstoque : emprestimo.getLivros()) {
+				livroAtribuirEstoque.setEstoque(livroAtribuirEstoque.getEstoque() + 1);
 			}
-			dayQuantity++;
+			if (dur.toDays() > 7) {
+				emprestimo.setDiasAtrasados((int) dur.toDays() - 7);
+				repositorio.devolver(emprestimo);
+			} else {
+				emprestimo.setDiasAtrasados(0);
+				repositorio.devolver(emprestimo);
+			}
 		}
-		return dayQuantity <= 7 ? 0 : dayQuantity - 7;
 	}
 
 }

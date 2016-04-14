@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 @Entity
 public class Funcionario {
 	@Id
@@ -17,7 +18,7 @@ public class Funcionario {
 	@Column(nullable = false)
 	private String telefone;
 	@Column(nullable = false)
-	private String endereco;
+	private String Email;
 	@Column(nullable = false)
 	private Double salario;
 
@@ -53,12 +54,12 @@ public class Funcionario {
 		this.telefone = telefone;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getEmail() {
+		return Email;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setEmail(String Email) {
+		this.Email = Email;
 	}
 
 	public Double getSalario() {
@@ -74,7 +75,7 @@ public class Funcionario {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + ((Email == null) ? 0 : Email.hashCode());
 		result = prime * result + ((idFuncionario == null) ? 0 : idFuncionario.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
@@ -96,10 +97,10 @@ public class Funcionario {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
+		if (Email == null) {
+			if (other.Email != null)
 				return false;
-		} else if (!endereco.equals(other.endereco))
+		} else if (!Email.equals(other.Email))
 			return false;
 		if (idFuncionario == null) {
 			if (other.idFuncionario != null)

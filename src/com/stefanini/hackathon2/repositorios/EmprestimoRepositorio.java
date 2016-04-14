@@ -24,6 +24,9 @@ public class EmprestimoRepositorio {
 	public void remover(Emprestimo emprestimo) {
 		entityManager.remove(entityManager.merge(emprestimo));
 	}
+	public void devolver(Emprestimo emprestimo) {
+		entityManager.merge(emprestimo);
+	}
 
 	public void removerPorId(Integer id) {
 		Emprestimo entity = entityManager.find(Emprestimo.class, id);

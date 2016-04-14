@@ -80,15 +80,15 @@
 
 						<p:column headerText="Dias em Atraso" style="text-align: center">
 							<h:outputText
-								value="#{emprestimoManagedBean.getDiasEmAtraso(emprestimo.dataEntrada, emprestimo.dataSaida)}" />
+								value="#{emprestimo.diasAtrasados}" />
 						</p:column>
 
 						<p:column headerText="Ação" style="text-align: center">
 							<p:commandButton icon="fa fa-fw fa-archive" title="Devolução"
 								update="tabelaDeEmprestimos emprestimoForm"
 								rendered="#{emprestimo.status eq 'ALUGADO'}"
-								action="#{emprestimoManagedBean.finalizarEmprestimo(emprestimo)}">
-								<p:confirm header="Confirmação" message="Finalizar empréstimo?"
+								action="#{emprestimoManagedBean.devolver(emprestimo)}">
+								<p:confirm header="Confirmação" message="Devolver  empréstimo?"
 									icon="ui-icon-alert" />
 							</p:commandButton>
 							

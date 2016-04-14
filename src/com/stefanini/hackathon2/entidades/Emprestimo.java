@@ -24,7 +24,7 @@ public class Emprestimo {
 
 	private Integer idEmprestimo;
 
-	@JoinColumn(name = "idPessoa")
+	@JoinColumn(name = "idPessoa", nullable = false)
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Pessoa pessoa;
 
@@ -32,7 +32,7 @@ public class Emprestimo {
 	@JoinColumn(name = "idLivro", nullable = false)
 	private List<Livro> livros;
 
-	@JoinColumn(name = "idFuncionario")
+	@JoinColumn(name = "idFuncionario", nullable = false)
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	private Funcionario funcionario;
 
@@ -46,6 +46,8 @@ public class Emprestimo {
 	@Convert(converter = LocalDateTimeConverter.class)
 	@Column
 	private LocalDateTime dataEntrada;
+	@Column
+	private Integer diasAtrasados;
 
 	public Integer getIdEmprestimo() {
 		return idEmprestimo;
@@ -103,12 +105,21 @@ public class Emprestimo {
 		this.dataEntrada = dataEntrada;
 	}
 
+	public Integer getDiasAtrasados() {
+		return diasAtrasados;
+	}
+
+	public void setDiasAtrasados(Integer diasAtrasados) {
+		this.diasAtrasados = diasAtrasados;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dataEntrada == null) ? 0 : dataEntrada.hashCode());
 		result = prime * result + ((dataSaida == null) ? 0 : dataSaida.hashCode());
+		result = prime * result + ((diasAtrasados == null) ? 0 : diasAtrasados.hashCode());
 		result = prime * result + ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + ((idEmprestimo == null) ? 0 : idEmprestimo.hashCode());
 		result = prime * result + ((livros == null) ? 0 : livros.hashCode());
@@ -135,6 +146,11 @@ public class Emprestimo {
 			if (other.dataSaida != null)
 				return false;
 		} else if (!dataSaida.equals(other.dataSaida))
+			return false;
+		if (diasAtrasados == null) {
+			if (other.diasAtrasados != null)
+				return false;
+		} else if (!diasAtrasados.equals(other.diasAtrasados))
 			return false;
 		if (funcionario == null) {
 			if (other.funcionario != null)
