@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import com.stefanini.hackathon2.entidades.Emprestimo;
+import com.stefanini.hackathon2.entidades.Livro;
 import com.stefanini.hackathon2.servicos.EmprestimoServico;
 import com.stefanini.hackathon2.util.Mensageiro;
 
@@ -71,6 +72,10 @@ public class EmprestimoManagedBean {
 	public void finalizarEmprestimo(Emprestimo emprestimo) {
 		emprestimo.setDataSaida(LocalDateTime.now());
 		servico.salvar(emprestimo);
+		emprestimo.setStatus("DEVOLVIDO");
+		for (Livro livroDevolve : emprestimo.getLivros()) {
+			livroDevolve.setEstoque(livroDevolve.getEstoque() +1);
+		}
 	}
 
 	public String getDiasEmAtraso(String dataRetiradaString, String dataEntregaString) {

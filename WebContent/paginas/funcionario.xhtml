@@ -70,26 +70,26 @@
 					value="#{funcionarioManagedBean.listaDeFuncionariosCadastrados}"
 					emptyMessage="Não existe cadastro de pessoas no banco"
 					style="padding-top:20px;">
-					<p:column headerText="Id">
+					<p:column headerText="Id" style="text-align: center">
 						<h:outputText value="#{funcionario.idFuncionario}" />
 					</p:column>
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" style="text-align: center">
 						<h:outputText value="#{funcionario.nome}" />
 					</p:column>
-					<p:column headerText="CPF">
+					<p:column headerText="CPF" style="text-align: center">
 						<h:outputText value="#{funcionario.cpf}" />
 					</p:column>
-					<p:column headerText="Telefone">
+					<p:column headerText="Telefone" style="text-align: center">
 						<h:outputText value="#{funcionario.telefone}" />
 					</p:column>
-					<p:column headerText="Endereço">
+					<p:column headerText="Endereço" style="text-align: center">
 						<h:outputText value="#{funcionario.endereco}" />
 					</p:column>
-					<p:column headerText="Salario">
+					<p:column headerText="Salario" style="text-align: center">
 						<h:outputText value="#{funcionario.salario}" />
 					</p:column>
 
-					<p:column headerText="Ações" style="text-align: center">
+					<p:column headerText="Ações" style="text-align: center" >
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Cadastro"
 							update="funcionarioForm"
 							action="#{funcionarioManagedBean.setFuncionario(funcionario)}" />
