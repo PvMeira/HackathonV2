@@ -10,6 +10,7 @@ import com.stefanini.hackathon2.entidades.Emprestimo;
 import com.stefanini.hackathon2.entidades.Livro;
 import com.stefanini.hackathon2.repositorios.EmprestimoRepositorio;
 import com.stefanini.hackathon2.transacao.Transacional;
+import com.stefanini.hackathon2.util.Mensageiro;
 
 public class EmprestimoServico {
 	@Inject
@@ -21,7 +22,7 @@ public class EmprestimoServico {
 			if (emprestimo.getStatus() == null) {
 				for (Livro confereEstoque : emprestimo.getLivros()) {
 					if (confereEstoque.getEstoque() <= 1) {
-						System.out.println("Desculpe mas o livro está sem exemplares");
+						Mensageiro.notificaInformacao("Desculpe", "Sem livros em estoque!");
 					} else {
 						for (Livro livroDiminui : emprestimo.getLivros()) {
 							livroDiminui.setEstoque(livroDiminui.getEstoque() - 1);

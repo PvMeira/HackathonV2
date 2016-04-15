@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.stefanini.hackathon2.entidades.Login;
 
-@WebFilter(filterName = "FiltroFuncionarioSenior", description = "Bibliotecario(a)relaçao ao emprestimos", urlPatterns = {
-		"/paginas/livro.xhtml, /paginas/livro_listaSelection.xhtml, /paginas/emprestimo.xhtml, /paginas/principal.xhtml" })
+@WebFilter(filterName = "FiltroFuncionarioSenior", description = "Filtro dedicado ao controle dos funcionário seniors e seus respectivos acessos", urlPatterns = {
+		"/paginas/livro.xhtml, /paginas/livro_listaSelection.xhtml, /paginas/emprestimo.xhtml" })
 public class FiltroBibliotecario implements Filter {
 
 	@Inject
@@ -34,10 +34,9 @@ public class FiltroBibliotecario implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.isBibliotecario() == true && session.isRegistroLivro() == true) {
+		} else if (session.getEmprestimo() == true && session.getLivro() == true && session.getPessoa() == false
+				&& session.getAdmin() == false) {
 			chain.doFilter(request, response);
-		} else {
-			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
 		}
 	}
 

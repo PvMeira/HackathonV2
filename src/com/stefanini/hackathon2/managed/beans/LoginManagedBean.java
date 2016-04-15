@@ -1,9 +1,7 @@
 package com.stefanini.hackathon2.managed.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -14,30 +12,27 @@ import com.stefanini.hackathon2.util.Mensageiro;
 
 @ManagedBean
 @ViewScoped
-public class LoginManagedBeans {
+public class LoginManagedBean {
 
 	private Login login;
 	private List<Login> listaDeLoginsCadastrados;
-	private String[] selecionarPermissoes;
-	private List<String> permissoes;
-	
 
 	@Inject
 	private LoginServico servico;
 
-	public LoginManagedBeans() {
+	public LoginManagedBean() {
 	}
 
 	public void salvar() {
 		servico.salvar(getLogin());
-		Mensageiro.notificaInformacao("Parabéns!", "Cadastro salvo com sucesso!");
+		Mensageiro.notificaInformacao("Parabéns!", "Login salvo com sucesso!");
 		carregaListaDeLogins();
 		limpar();
 	}
 
 	public void deletar(Login login) {
 		servico.deletar(login);
-		Mensageiro.notificaInformacao("Parabéns!", "Cadastro deletado com sucesso!");
+		Mensageiro.notificaInformacao("Parabéns!", "Login deletado com sucesso!");
 		carregaListaDeLogins();
 		limpar();
 	}
@@ -50,7 +45,7 @@ public class LoginManagedBeans {
 		setListaDeLoginsCadastrados(servico.carregaTodosLoginsDoBanco());
 	}
 
-	public List<Login> getListaDePessoasCadastradas() {
+	public List<Login> getListaDeLoginsCadastrados() {
 		if (listaDeLoginsCadastrados == null) {
 			carregaListaDeLogins();
 		}
@@ -70,32 +65,6 @@ public class LoginManagedBeans {
 
 	public void setLogin(Login login) {
 		this.login = login;
-	}
-
-	@PostConstruct
-	public void init() {
-		permissoes = new ArrayList<String>();
-		permissoes.add("ADM");
-		permissoes.add("Bibliotecario");
-		permissoes.add("RegistroLivro");
-		permissoes.add("RegistroPessoa");
-
-	}
-
-	public String[] getSelecionarPermissoes() {
-		return selecionarPermissoes;
-	}
-
-	public void setSelecionarPermissoes(String[] selecionarPermissoes) {
-		this.selecionarPermissoes = selecionarPermissoes;
-	}
-
-	public List<String> getPermissoes() {
-		return permissoes;
-	}
-
-	public void setPermissoes(List<String> permissoes) {
-		this.permissoes = permissoes;
 	}
 
 }
