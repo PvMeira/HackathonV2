@@ -30,7 +30,7 @@ public class Login {
 	@Column(nullable = true)
 	private Boolean logado;
 	@OneToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "idFuncionario", nullable = false)
+	@JoinColumn(name = "idFuncionario")
 	private Funcionario funcionario;
 
 	public Login() {

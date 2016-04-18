@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.stefanini.hackathon2.entidades.Login;
 
-@WebFilter(filterName = "FiltroAdmin", description = "Filtro dedicado ao controle do admin e seus respectivos acessos", urlPatterns = {
-		"/paginas/emprestimo.xhtml, /paginas/pessoa.xhtml, /paginas/funcionario.xhtml, /paginas/livro.xhtml,"
-				+ "/paginas/livro_listaSelection.xhtml, paginas/login.xhtml" })
+@WebFilter(filterName = "FiltroADM", urlPatterns = {
+		"/paginas/emprestimo.xhtml, /paginas/pessoa.xhtml, /paginas/funcionario.xhtml,/paginas/livro.xhtml,"
+				+ "/paginas/login.xhtml" })
 public class FiltroADM implements Filter {
 
 	@Inject
@@ -35,8 +35,10 @@ public class FiltroADM implements Filter {
 
 		if (session == null) {
 			resp.sendRedirect(req.getServletContext().getContextPath() + "/paginas/principal.xhtml");
-		} else if (session.getAdmin() == true) {
-			chain.doFilter(request, response);
+		} else if (session.getLogado()) {
+			if (session.getAdmin() == true) {
+				chain.doFilter(request, response);
+			}
 		}
 	}
 

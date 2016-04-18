@@ -6,11 +6,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+
+
 <h:head>
 	<title>Hackathon2</title>
 </h:head>
 
 <h:body>
+
 	<h:outputStylesheet library="styles" name="primefacesOverride.css" />
 
 	<p:layout style="min-width:400px; min-height:500px;" fullPage="true">
@@ -21,34 +24,39 @@
 			<h:form>
 				<p:menubar>
 					<p:menuitem value="Principal" url="/paginas/principal.xhtml"
-						icon="fa fa-fw fa-home" />
+						icon="fa fa-fw fa-home"
+						rendered="#{!sessaoManagedBean.login.logado}" />
 
 					<p:submenu label="Cadastros" icon="fa fa-fw fa-edit">
 						<p:menuitem value="Livros" icon="fa fa-fw fa-book"
-							url="/paginas/livro.xhtml" />
+							url="/paginas/livro.xhtml"
+							rendered="#{sessaoManagedBean.login.admin || sessaoManagedBean.login.livro}" />
 						<p:separator />
 						<p:menuitem value="Pessoas" icon="fa fa-fw fa-users"
-							url="/paginas/pessoa.xhtml" />
+							url="/paginas/pessoa.xhtml"
+							rendered="#{sessaoManagedBean.login.admin || sessaoManagedBean.login.pessoa}" />
 						<p:separator />
 						<p:menuitem value="Funcionários" icon="fa fa-fw fa-suitcase"
-							url="/paginas/funcionario.xhtml" />
-							<p:separator />
-						<p:menuitem value="Login" icon="fa fa-fw fa-plus-circle"
-							url="/paginas/loginCadastro.xhtml" />
-
+							url="/paginas/funcionario.xhtml"
+							rendered="#{sessaoManagedBean.login.admin}" />
+						<p:separator />
+						<p:menuitem value="Logins" icon="fa fa-fw fa-key"
+							url="/paginas/login.xhtml"
+							rendered="#{sessaoManagedBean.login.admin}" />
 					</p:submenu>
 
 					<p:submenu label="Movimentos" icon="fa fa-fw fa-refresh">
 						<p:menuitem value="Empréstimos" icon="fa fa-fw fa-exchange"
-							url="/paginas/emprestimo.xhtml" />
-						
+							url="/paginas/emprestimo.xhtml"
+							rendered="#{sessaoManagedBean.login.admin || sessaoManagedBean.login.emprestimo}" />
 					</p:submenu>
-
 
 					<f:facet name="options">
 						<p:inputText style="margin-right:10px" placeholder="buscar" />
 						<p:commandButton type="button" value="Sair da aplicação"
-							icon="fa fa-fw fa-power-off" />
+							action="#{sessaoManagedBean.sair()}"
+							url="/inicial/principal.xhtml" icon="fa fa-fw fa-power-off"
+							rendered="#{sessaoManagedBean.login.logado}" />
 					</f:facet>
 				</p:menubar>
 			</h:form>
@@ -66,21 +74,10 @@
 		<p:layoutUnit position="south" resizable="true" size="40" minSize="40"
 			maxSize="40" style="border: 0px solid white;">
 			<p:outputLabel style="font-size: 12px; float: right;"
-				value="Copyright 2016. Todos os Direitos reservados PvMeira" />
+				value="Copyright 2016. Todos os Direitos reservados a Pedro ." />
 		</p:layoutUnit>
-		<h:form>
-			<p:growl id="messages" showDetail="true" sticky="true" />
-
-			<p:idleMonitor timeout="999900">
-				<p:ajax event="idle" listener="#{idleMonitorView.onIdle}"
-					update="messages" />
-				<p:ajax event="active" listener="#{idleMonitorView.onActive}"
-					update="messages" />
-			</p:idleMonitor>
-		</h:form>
 
 	</p:layout>
 
 </h:body>
 </html>
-

@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.stefanini.hackathon2.entidades.Login;
 
-@WebFilter(filterName = "FiltroFuncionarioPleno", description = "Filtro dedicado ao controle dos funcionários plenos e seus respectivos acessos", urlPatterns = {
-		"/paginas/livro_listaSelection.xhtml, /paginas/emprestimo.xhtml " })
+@WebFilter(filterName = "FiltroRegistroPessoa", urlPatterns = {
+		"paginas/emprestimo.xhtml " })
 public class FiltroRegistroPessoa implements Filter {
 
 	@Inject

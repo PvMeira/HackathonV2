@@ -19,6 +19,43 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<filter>
+		<filter-name>FiltroADM</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroADM</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroADM</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>FiltroRegistroLivro</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroRegistroLivro</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroRegistroLivro</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+	
+		<filter>
+		<filter-name>FiltroBibliotecario</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroBibliotecario</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroBibliotecario</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+	
+		<filter>
+		<filter-name>FiltroRegistroPessoa</filter-name>
+		<filter-class>com.stefanini.hackathon2.filtros.FiltroRegistroPessoa</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroRegistroPessoa</filter-name>
+		<url-pattern>/restricted/*</url-pattern>
+	</filter-mapping>
+	
+		
 	
 	<context-param>
 	   <param-name>primefaces.FONT_AWESOME</param-name>

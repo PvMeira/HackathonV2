@@ -13,11 +13,11 @@ public class LoginServico {
 	private LoginRepositorio repositorio;
 
 	@Transacional
-	public void salvar(Login livro) {
-		if (livro.getIdLogin() == null) {
-			repositorio.inserir(livro);
+	public void salvar(Login login) {
+		if (login.getIdLogin() == null ) {
+			repositorio.inserir(login);
 		} else {
-			repositorio.atualizar(livro);
+			repositorio.atualizar(login);
 		}
 	}
 
@@ -27,8 +27,8 @@ public class LoginServico {
 	}
 
 	@Transacional
-	public void deletar(Login livro) {
-		repositorio.remover(livro);
+	public void deletar(Login login) {
+		repositorio.remover(login);
 		;
 	}
 }
