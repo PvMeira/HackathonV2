@@ -41,7 +41,7 @@
 							rendered="#{sessaoManagedBean.login.admin}" />
 						<p:separator />
 						<p:menuitem value="Logins" icon="fa fa-fw fa-key"
-							url="/paginas/login.xhtml"
+							url="/paginas/loginCadastro.xhtml"
 							rendered="#{sessaoManagedBean.login.admin}" />
 					</p:submenu>
 
@@ -55,7 +55,7 @@
 						<p:inputText style="margin-right:10px" placeholder="buscar" />
 						<p:commandButton type="button" value="Sair da aplicação"
 							action="#{sessaoManagedBean.sair()}"
-							url="/inicial/principal.xhtml" icon="fa fa-fw fa-power-off"
+							url="/paginas/principal.xhtml" icon="fa fa-fw fa-power-off"
 							rendered="#{sessaoManagedBean.login.logado}" />
 					</f:facet>
 				</p:menubar>

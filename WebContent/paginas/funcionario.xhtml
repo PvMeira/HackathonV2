@@ -24,26 +24,26 @@
 
 						<p:outputLabel for="nome" value="Nome:" />
 						<p:inputText id="nome" requiredMessage="Campo obrigatório"
-							required="true"
+							required="true" placeholder="nome"
 							value="#{funcionarioManagedBean.funcionario.nome}" />
 						<p:message for="nome" />
 
 						<p:outputLabel for="cpf" value="CPF:" />
 						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
-							mask="999.999.999-99" required="true"
+							mask="999.999.999-99" required="true" placeholder="CPF 999.999.999-99"
 							value="#{funcionarioManagedBean.funcionario.cpf}" />
 						<p:message for="cpf" />
 
 						<p:outputLabel for="telefone" value="Telefone:" />
 						<p:inputMask maxlength="16" id="telefone"
 							requiredMessage="Campo obrigatório" mask="99-9999-9999"
-							required="true"
+							required="true" placeholder="Telefone "
 							value="#{funcionarioManagedBean.funcionario.telefone}" />
 						<p:message for="telefone" />
 
 						<p:outputLabel for="email" value="email" />
 						<p:inputText id="email" required="true" label="email"
-							requiredMessage="E-mail."
+							requiredMessage="E-mail." placeholder="e-mail"
 							validatorMessage="Formato de email Invalido"
 							value="#{funcionarioManagedBean.funcionario.email}">
 
@@ -54,7 +54,7 @@
 						<p:outputLabel></p:outputLabel>
 
 						<p:outputLabel for="salario" value="Salario:" />
-						<p:inputMask maxlength="50" id="salario"
+						<p:inputMask maxlength="50" id="salario" placeholder="salario"
 							requiredMessage="Campo obrigatório" required="true"
 							value="#{funcionarioManagedBean.funcionario.salario}" />
 						<p:message for="salario" />
@@ -92,7 +92,7 @@
 						<h:outputText value="#{funcionario.email}" />
 					</p:column>
 					<p:column headerText="Salario" style="text-align: center">
-						<h:outputText value="#{funcionario.salario}" />
+						<h:outputText converter="conversorSalario" value="#{funcionario.salario}" />
 					</p:column>
 
 					<p:column headerText="Ações" style="text-align: center">

@@ -23,25 +23,25 @@
 					<p:panelGrid columns="3">
 
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório"
+						<p:inputText id="nome" requiredMessage="Campo obrigatório" placeholder="nome"
 							required="true" value="#{pessoaManagedBean.pessoa.nome}" />
 						<p:message for="nome" />
 
 						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
+						<p:inputMask id="cpf" requiredMessage="Campo obrigatório" placeholder="CPF"
 							mask="999.999.999-99" required="true"
 							value="#{pessoaManagedBean.pessoa.cpf}" />
 						<p:message for="cpf" />
 
 						<p:outputLabel for="telefone" value="Telefone:" />
 						<p:inputMask maxlength="16" id="telefone"
-							requiredMessage="Campo obrigatório" mask="99-9999-9999"
+							requiredMessage="Campo obrigatório" mask="99-9999-9999" placeholder="telefone "
 							required="true" value="#{pessoaManagedBean.pessoa.telefone}" />
 						<p:message for="telefone" />
 
 						<p:outputLabel for="email" value="E-mail" />
 						<p:inputMask maxlength="20" id="email"
-							requiredMessage="Campo obrigatório" required="true"
+							requiredMessage="Campo obrigatório" required="true" placeholder="email"
 							value="#{pessoaManagedBean.pessoa.eMail}" />
 						<p:message for="email" />
 

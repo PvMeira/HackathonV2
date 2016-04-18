@@ -16,7 +16,7 @@
     <p:panelGrid columns="2">
     
      <p:outputLabel for="user" value="Username:" />
-     <p:inputText id="user" required="true" value="#{sessaoManagedBean.usuario}" />
+     <p:inputText  placeholder="Login" id="user" required="true" value="#{sessaoManagedBean.usuario}" />
       
 
      <p:outputLabel for="senha" value="Senha:" />
@@ -24,6 +24,9 @@
 
      <p:commandButton value="Enviar" icon="ui-icon-star"
       action="#{sessaoManagedBean.entrar()}" >
+     </p:commandButton>
+      <p:commandButton value="Registrar-se" icon="ui-icon-star"
+      action="loginCadastro.xhtml?faces-redirect=true" >
      </p:commandButton>
 
     </p:panelGrid>

@@ -17,7 +17,7 @@ import com.stefanini.hackathon2.entidades.Login;
 
 @WebFilter(filterName = "FiltroADM", urlPatterns = {
 		"/paginas/emprestimo.xhtml, /paginas/pessoa.xhtml, /paginas/funcionario.xhtml,/paginas/livro.xhtml,"
-				+ "/paginas/login.xhtml" })
+				+ "/paginas/loginCadastro.xhtml" })
 public class FiltroADM implements Filter {
 
 	@Inject

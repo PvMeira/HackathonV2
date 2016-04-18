@@ -1,6 +1,6 @@
 package com.stefanini.hackathon2.entidades;
 
-import java.sql.Blob;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +25,7 @@ public class Livro {
 	private Integer estoque;
 	@Lob
 	@Column(nullable = true)
-	private Blob foto;
+	private byte[] foto;
 
 	public Livro() {
 	}
@@ -70,11 +70,11 @@ public class Livro {
 		this.estoque = estoque;
 	}
 
-	public Blob getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 
@@ -84,7 +84,7 @@ public class Livro {
 		int result = 1;
 		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
 		result = prime * result + ((estoque == null) ? 0 : estoque.hashCode());
-		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
+		result = prime * result + Arrays.hashCode(foto);
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((paginas == null) ? 0 : paginas.hashCode());
@@ -110,10 +110,7 @@ public class Livro {
 				return false;
 		} else if (!estoque.equals(other.estoque))
 			return false;
-		if (foto == null) {
-			if (other.foto != null)
-				return false;
-		} else if (!foto.equals(other.foto))
+		if (!Arrays.equals(foto, other.foto))
 			return false;
 		if (id == null) {
 			if (other.id != null)
