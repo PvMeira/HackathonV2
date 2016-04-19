@@ -13,6 +13,7 @@ import com.stefanini.hackathon2.servicos.LoginServico;
 
 @ManagedBean(eager = true)
 @SessionScoped
+
 public class SessaoManagedBean {
 
 	private String usuario;

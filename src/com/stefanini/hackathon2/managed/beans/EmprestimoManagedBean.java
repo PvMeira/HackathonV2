@@ -24,8 +24,7 @@ public class EmprestimoManagedBean {
 	}
 
 	public void salvar() {
-		servico.salvar(getEmprestimo());
-		
+		servico.salvar(getEmprestimo());	
 		carregaListaDeEmprestimos();
 		limpar();
 	}
