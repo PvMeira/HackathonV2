@@ -25,7 +25,7 @@ public class EmprestimoManagedBean {
 
 	public void salvar() {
 		servico.salvar(getEmprestimo());
-		Mensageiro.notificaInformacao("Parabéns!", "Cadastro salvo com sucesso!");
+		
 		carregaListaDeEmprestimos();
 		limpar();
 	}

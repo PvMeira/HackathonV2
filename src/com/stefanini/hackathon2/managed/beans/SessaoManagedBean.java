@@ -59,6 +59,9 @@ public class SessaoManagedBean {
 				if (login.getAdmin() == true) {
 					return "funcionario.xhtml?faces-redirect=true";
 				}
+				if (login.getPessoa()== true) {
+					return "pessoa.xhtml?faces-redirect=true";
+				}
 				if (login.getEmprestimo() == true) {
 					return "emprestimo.xhtml?faces-redirect=true";
 				} else {

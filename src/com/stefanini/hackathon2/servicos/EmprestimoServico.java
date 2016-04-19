@@ -34,6 +34,7 @@ public class EmprestimoServico {
 						emprestimo.setDataEntrada(LocalDateTime.now());
 						emprestimo.setStatus("ALUGADO");
 						repositorio.inserir(emprestimo);
+						Mensageiro.notificaInformacao("Parabéns!", "Cadastro salvo com sucesso!");
 					}
 
 				}
