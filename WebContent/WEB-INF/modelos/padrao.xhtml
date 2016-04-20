@@ -46,16 +46,16 @@
 					</p:submenu>
 
 					<p:submenu label="Movimentos" icon="fa fa-fw fa-refresh">
-						<p:menuitem value="Empréstimos" icon="fa fa-fw fa-exchange"
+						<p:menuitem value="Empréstimos" icon="fa fa-fw fa-folder-open-o"
 							url="/paginas/emprestimo.xhtml"
 							rendered="#{sessaoManagedBean.login.admin || sessaoManagedBean.login.emprestimo}" />
 					</p:submenu>
 
 					<f:facet name="options">
-						<p:inputText style="margin-right:10px" placeholder="buscar" />
-						<p:commandButton value="Sair da aplicação"
+						
+						<p:commandButton value="Sign-out"
 							action="#{sessaoManagedBean.sair()}"
-							icon="fa fa-fw fa-power-off"
+							icon="fa fa-fw fa-sign-out"
 							rendered="#{sessaoManagedBean.login.logado}" />
 					</f:facet>
 				</p:menubar>

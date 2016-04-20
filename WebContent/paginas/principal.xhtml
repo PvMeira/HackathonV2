@@ -1,36 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
- xmlns:h="http://java.sun.com/jsf/html"
- xmlns:f="http://java.sun.com/jsf/core"
- xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui">
- 
- 
- <ui:composition template="/WEB-INF/modelos/homePadrao.xhtml">
-  <ui:define name="conteudo" >
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-  <h:body>
-   <h:form style="margin-left:500px; margin-top:100px;">
-    <p:messages id="messages" />
-    
-    <p:panelGrid columns="2">
-    
-     <p:outputLabel for="user" value="Username:" />
-     <p:inputText  placeholder="Login" id="user" required="true" value="#{sessaoManagedBean.usuario}" />
-      
 
-     <p:outputLabel for="senha" value="Senha:" />
-     <p:password id="senha" placeholder="Senha..." required="true" value="#{sessaoManagedBean.senha}" />
+<ui:composition template="/WEB-INF/modelos/homePadrao.xhtml">
+	<ui:define name="conteudo">
 
-     <p:commandButton value="Enviar" icon="ui-icon-star"
-      action="#{sessaoManagedBean.entrar()}" >
-     </p:commandButton>
-    
+		<h:body>
+			<h:form style="margin-left:500px; margin-top:100px;">
+				<p:messages id="messages" />
 
-    </p:panelGrid>
-   </h:form>
-  </h:body>
+				<p:panelGrid columns="3">
 
- </ui:define>
- </ui:composition>
+					<p:outputLabel for="user" value="Username:" />
+					<p:inputText placeholder="Login" id="user" required="true"
+						value="#{sessaoManagedBean.usuario}"
+						requiredMessage="Campo obrigatório"  />
+					<p:message for="user" />
+
+
+					<p:outputLabel for="senha" value="Senha:" />
+					<p:password id="senha" placeholder="Senha..." required="true"
+						value="#{sessaoManagedBean.senha}"
+						requiredMessage="Campo obrigatório"  />
+					<p:message for="senha" />
+
+					<p:commandButton value="Sign-in" icon="fa fa-fw fa-sign-in"
+						action="#{sessaoManagedBean.entrar()}">
+					</p:commandButton>
+
+
+				</p:panelGrid>
+			</h:form>
+		</h:body>
+
+	</ui:define>
+</ui:composition>
 </html>

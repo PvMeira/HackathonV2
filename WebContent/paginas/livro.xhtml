@@ -22,36 +22,39 @@
 					<p:panelGrid columns="3">
 
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório" placeholder="Nome"
-							required="true" value="#{livroManagedBean.livro.nome}" />
+						<p:inputText id="nome" requiredMessage="Campo obrigatório"
+							placeholder="Nome" required="true"
+							value="#{livroManagedBean.livro.nome}" />
 						<p:message for="nome" />
 
 						<p:outputLabel for="autor" value="Autor:" />
-						<p:inputText id="autor" requiredMessage="Campo obrigatório" placeholder="Autor"
-							required="true" value="#{livroManagedBean.livro.autor}" />
+						<p:inputText id="autor" requiredMessage="Campo obrigatório"
+							placeholder="Autor" required="true"
+							value="#{livroManagedBean.livro.autor}" />
 						<p:message for="autor" />
 
 						<p:outputLabel for="paginas" value="Páginas:" />
 						<p:inputMask maxlength="4" id="paginas"
-							requiredMessage="Campo obrigatório"  required="true" placeholder="Páginas"
-							value="#{livroManagedBean.livro.paginas}" />
+							requiredMessage="Campo obrigatório" required="true"
+							placeholder="Páginas" value="#{livroManagedBean.livro.paginas}" />
 						<p:message for="paginas" />
 
 						<p:outputLabel for="estoque" value="Estoque:" />
 						<p:inputMask maxlength="100" id="estoque"
-							requiredMessage="Campo obrigatório" required="true" placeholder="Estoque"
-							value="#{livroManagedBean.livro.estoque}" />
+							requiredMessage="Campo obrigatório" required="true"
+							placeholder="Estoque" value="#{livroManagedBean.livro.estoque}" />
 						<p:message for="estoque" />
 
-						<p:outputLabel for="foto" value="Adicionar foto(s):" />
-						<p:fileUpload id="foto"
-							fileUploadListener="#{livroManagedBean.livro.foto}"
-							mode="advanced" dragDropSupport="false" multiple="true"
-							update="messages" sizeLimit="1000000" fileLimit="2"
-							allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-						<p:growl id="messages" showDetail="true" />
+						<h:form>
+							<p:outputLabel for="fotos" value="Adicionar foto:" />
 
-
+							<p:fileUpload id="fotos"
+								fileUploadListener="#{livroManagedBean.uploadFoto}"
+								mode="advanced" dragDropSupport="false" multiple="true"
+								update="messages" sizeLimit="1000000"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+							<p:growl id="messages" showDetail="true" />
+						</h:form>
 					</p:panelGrid>
 
 					<p:commandButton value="Salvar" process="@form"
@@ -78,11 +81,11 @@
 						<h:outputText value="#{livro.paginas}" />
 
 					</p:column>
-					<p:column headerText="foto">
-						<p:galleria value="#{livro.foto}" var="foto" panelWidth="100"
-							panelHeight="70" showCaption="true">
-							<p:graphicImage name="#{livro.foto}" alt="Capa" title="Book" />
-						</p:galleria>
+					<p:column headerText="Foto">
+						<p:graphicImage value="#{livroManagedBean.getFoto(livro.foto)}"
+							cache="false" width="500" height="250" />
+						<p:graphicImage library="fotosDoBanco" name="[Booo.jpg"
+							style="padding-top: 15px !important" />
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro"

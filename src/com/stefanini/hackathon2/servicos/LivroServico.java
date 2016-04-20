@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import com.stefanini.hackathon2.entidades.Livro;
 import com.stefanini.hackathon2.repositorios.LivroRepositorio;
 import com.stefanini.hackathon2.transacao.Transacional;
+import com.stefanini.hackathon2.util.Mensageiro;
 
 public class LivroServico {
 
@@ -17,8 +18,10 @@ public class LivroServico {
 	public void salvar(Livro livro) {
 		if (livro.getId() == null) {
 			repositorio.inserir(livro);
+			Mensageiro.notificaInformacao("Parabéns!", "Livro salvo com sucesso!");
 		} else {
 			repositorio.atualizar(livro);
+			Mensageiro.notificaInformacao("Parabéns!", "Livro salvo com sucesso!");
 		}
 	}
 
@@ -30,6 +33,7 @@ public class LivroServico {
 	@Transacional
 	public void deletar(Livro livro) {
 		repositorio.remover(livro);;
+		Mensageiro.notificaInformacao("Parabéns!", "Livro deletado com sucesso!");
 	}
 	
 }

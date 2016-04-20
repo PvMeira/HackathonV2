@@ -24,7 +24,7 @@ public class Livro {
 	@Column(nullable = false)
 	private Integer estoque;
 	@Lob
-	@Column(nullable = true)
+	@Column(nullable = true, name = "Foto")
 	private byte[] foto;
 
 	public Livro() {

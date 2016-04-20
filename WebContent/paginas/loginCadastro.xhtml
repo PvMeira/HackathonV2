@@ -19,39 +19,50 @@
 				<h:form id="loginForm">
 					<p:growl id="growl" showDetail="true" sticky="false" life="4000" />
 
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="3">
 						<p:outputLabel for="usuario" value="Usuário:" />
 						<p:inputText id="usuario" placeholder="Usuário"
 							requiredMessage="Campo obrigatório" required="true"
 							value="#{loginManagedBean.login.usuario}" />
+							<p:message for="usuario"/>
 						<p:outputLabel for="senha1" value="Senha:" />
 						<p:password id="senha1" placeholder="Senha"
 							value="#{loginManagedBean.login.senha}"
-							validatorMessage="Senhas devem ser iguais"
+							validatorMessage="Senhas devem ser iguais" requiredMessage="Campo obrigatório"
 							promptLabel="Use letras e números" weakLabel="Senha fraca"
 							goodLabel="Senha média" strongLabel="Senha forte" match="senha2"
 							label="Senha: " required="true" feedback="true" inline="true" />
+							
+							<p:message for="senha1"/>
+							
 						<p:outputLabel for="senha2" value="Repita a senha:" />
-						<p:password id="senha2" placeholder="Repita a senha"
+						
+						<p:password id="senha2" placeholder="Repita a senha" requiredMessage="Campo obrigatório"
 							value="#{loginManagedBean.login.senha}"
 							validatorMessage="Senhas devem ser iguais"
 							weakLabel="Senha fraca" goodLabel="Senha média"
 							strongLabel="Senha forte" label="Repita a senha: "
 							required="true" feedback="true" inline="true" />
-						<p:outputLabel for="idFuncionario" value="Nome do Funcionário: " />
+							
+							<p:message for="senha2"/>
+							
+						<p:outputLabel for="idFuncionario" value="Funcionário: " />
+						
 						<p:selectOneMenu id="idFuncionario" converter="conversorCombobox"
 							value="#{loginManagedBean.login.funcionario}">
 
 							<f:selectItem itemLabel="Selecione um funcionário" itemValue="" />
 
-							<f:selectItems itemLabel="#{funcionario.nome}"
+							<f:selectItems itemLabel="#{funcionario.nome}" requiredMessage="" 
 								itemValue="#{funcionario}" var="funcionario"
 								value="#{funcionarioManagedBean.listaDeFuncionariosCadastrados}" />
 						</p:selectOneMenu>
+						<p:message for="idFuncionario"/>
 
 
 
-
+					</p:panelGrid>
+					<p:panelGrid columns="2">
 						<p:outputLabel value="Permissões para cadastra pessoas:" />
 						<p:selectBooleanCheckbox value="#{loginManagedBean.login.pessoa}" />
 
