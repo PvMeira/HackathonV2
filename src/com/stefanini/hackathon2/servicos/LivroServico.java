@@ -13,10 +13,10 @@ public class LivroServico {
 
 	@Inject
 	private LivroRepositorio repositorio;
-	
+
 	@Transacional
 	public void salvar(Livro livro) {
-		if (livro.getId() == null) {
+		if (livro.getIdLivro() == null) {
 			repositorio.inserir(livro);
 			Mensageiro.notificaInformacao("Parabéns!", "Livro salvo com sucesso!");
 		} else {
@@ -32,8 +32,9 @@ public class LivroServico {
 
 	@Transacional
 	public void deletar(Livro livro) {
-		repositorio.remover(livro);;
+		repositorio.remover(livro);
+		;
 		Mensageiro.notificaInformacao("Parabéns!", "Livro deletado com sucesso!");
 	}
-	
+
 }

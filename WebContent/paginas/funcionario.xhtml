@@ -30,7 +30,8 @@
 
 						<p:outputLabel for="cpf" value="CPF:" />
 						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
-							mask="999.999.999-99" required="true" placeholder="CPF 999.999.999-99"
+							mask="999.999.999-99" required="true"
+							placeholder="CPF 999.999.999-99"
 							value="#{funcionarioManagedBean.funcionario.cpf}" />
 						<p:message for="cpf" />
 
@@ -92,7 +93,8 @@
 						<h:outputText value="#{funcionario.email}" />
 					</p:column>
 					<p:column headerText="Salario" style="text-align: center">
-						<h:outputText converter="conversorSalario" value="#{funcionario.salario}" />
+						<h:outputText converter="conversorSalario"
+							value="#{funcionario.salario}" />
 					</p:column>
 
 					<p:column headerText="Ações" style="text-align: center">
@@ -126,3 +128,5 @@
 </ui:composition>
 
 </html>
+
+

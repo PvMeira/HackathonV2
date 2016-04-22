@@ -7,25 +7,19 @@
 	widgetVar="dialogLivro" modal="false" appendToBody="true"
 	header="Escolher Livro" closable="true">
 
-	<!-- 
-    <h:form id="formDialog" prependId="false">
-    	 <h:outputText value="This is a Modal Dialog." />
-    </h:form>
-     -->
+
 	<div style="height: 200px; width: 700px; overflow: auto;">
 		<p:dataTable id="tabelaModalDeLivros" var="livro"
 			value="#{livroManagedBean.listaDeLivrosCadastrados}"
 			selection="#{emprestimoManagedBean.emprestimo.livros}"
-			rowKey="#{livro.id}"
+			rowKey="#{livro.idLivro}"
 			emptyMessage="Não existem livros cadastrados"
 			style="margin-bottom:0; padding-top:20px">
-			<f:facet name="header">
-	            Checkbox
-	        </f:facet>
+
 			<p:column selectionMode="multiple"
 				style="width:16px;text-align:center" />
 			<p:column headerText="Id">
-				<h:outputText value="#{livro.id}" />
+				<h:outputText value="#{livro.idLivro}" />
 			</p:column>
 			<p:column headerText="Nome">
 				<h:outputText value="#{livro.nome}" />
@@ -38,8 +32,9 @@
 			</p:column>
 			<f:facet name="footer">
 				<p:commandButton process="tabelaModalDeLivros"
-					update="@form emprestimoForm tabelaDeEmprestimos" value="Selecionar"
-					icon="fa fa-fw fa-archive" oncomplete="PF('dialogLivro').hide()" />
+					update="@form emprestimoForm tabelaDeEmprestimos"
+					value="Selecionar" icon="fa fa-fw fa-archive"
+					oncomplete="PF('dialogLivro').hide()" />
 			</f:facet>
 		</p:dataTable>
 	</div>

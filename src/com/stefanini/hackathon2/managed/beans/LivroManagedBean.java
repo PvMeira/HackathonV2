@@ -29,7 +29,6 @@ public class LivroManagedBean {
 
 	public void salvar() {
 		servico.salvar(getLivro());
-
 		carregaListaDeLivros();
 		limpar();
 	}
@@ -50,11 +49,9 @@ public class LivroManagedBean {
 	}
 
 	public List<Livro> getListaDeLivrosCadastrados() {
-		carregaListaDeLivros();
-		// if (listaDeLivrosCadastrados == null ||
-		// listaDeLivrosCadastrados.isEmpty()) {
-		// carregaListaDeLivros();
-		// }
+		if (listaDeLivrosCadastrados == null) {
+			carregaListaDeLivros();
+		}
 		return listaDeLivrosCadastrados;
 	}
 

@@ -22,27 +22,29 @@
 					<p:panelGrid columns="3">
 
 						<p:outputLabel for="nome" value="Nome:" />
-						<p:inputText id="nome" requiredMessage="Campo obrigatório"
-							placeholder="Nome" required="true"
+						<p:inputText id="nome" placeholder="Nome"
+							requiredMessage="Campo obrigatório" required="true"
 							value="#{livroManagedBean.livro.nome}" />
 						<p:message for="nome" />
 
 						<p:outputLabel for="autor" value="Autor:" />
-						<p:inputText id="autor" requiredMessage="Campo obrigatório"
-							placeholder="Autor" required="true"
+						<p:inputText id="autor" placeholder="Autor"
+							requiredMessage="Campo obrigatório" required="true"
 							value="#{livroManagedBean.livro.autor}" />
 						<p:message for="autor" />
 
 						<p:outputLabel for="paginas" value="Páginas:" />
 						<p:inputMask maxlength="4" id="paginas"
-							requiredMessage="Campo obrigatório" required="true"
-							placeholder="Páginas" value="#{livroManagedBean.livro.paginas}" />
+							placeholder="Número de páginas"
+							requiredMessage="Campo obrigatório" mask="9?999" required="true"
+							value="#{livroManagedBean.livro.paginas}" />
 						<p:message for="paginas" />
 
-						<p:outputLabel for="estoque" value="Estoque:" />
-						<p:inputMask maxlength="100" id="estoque"
-							requiredMessage="Campo obrigatório" required="true"
-							placeholder="Estoque" value="#{livroManagedBean.livro.estoque}" />
+						<p:outputLabel for="estoque" value="Quantidade:" />
+						<p:inputMask maxlength="8" id="estoque"
+							placeholder="Quantidade em estoque"
+							requiredMessage="Campo obrigatório" mask="9?999" required="true"
+							value="#{livroManagedBean.livro.estoque}" />
 						<p:message for="estoque" />
 
 						<h:form>
@@ -51,10 +53,11 @@
 							<p:fileUpload id="fotos"
 								fileUploadListener="#{livroManagedBean.uploadFoto}"
 								mode="advanced" dragDropSupport="false" multiple="true"
-								update="messages" sizeLimit="1000000"
+								update="messages" sizeLimit="1000000" fileLimit="3"
 								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 							<p:growl id="messages" showDetail="true" />
 						</h:form>
+
 					</p:panelGrid>
 
 					<p:commandButton value="Salvar" process="@form"
@@ -64,28 +67,32 @@
 						action="#{livroManagedBean.limpar()}" icon="fa fa-fw fa-eraser" />
 				</h:form>
 
-				<p:dataTable id="tabelaDeLivros" var="livro"
+				<p:dataTable id="tabelaDeLivros" var="livro" cache="disable"
 					value="#{livroManagedBean.listaDeLivrosCadastrados}"
 					emptyMessage="Não existem livros cadastrados"
 					style="padding-top:20px;">
-					<p:column headerText="Estoque" style="text-align: center">
-						<h:outputText value="#{livro.estoque}" />
+					<p:column headerText="Id">
+						<h:outputText value="#{livro.idLivro}" />
 					</p:column>
-					<p:column headerText="Nome" style="text-align: center">
-						<h:outputText value="#{livro.nome}" />
-					</p:column>
-					<p:column headerText="Autor" style="text-align: center">
-						<h:outputText value="#{livro.autor}" />
-					</p:column>
-					<p:column headerText="Páginas" style="text-align: center">
-						<h:outputText value="#{livro.paginas}" />
 
-					</p:column>
 					<p:column headerText="Foto">
 						<p:graphicImage value="#{livroManagedBean.getFoto(livro.foto)}"
-							cache="false" width="500" height="250" />
-						<p:graphicImage library="fotosDoBanco" name="[Booo.jpg"
-							style="padding-top: 15px !important" />
+							cache="false" width="500" height="500" 
+							 style="padding-top: 15px !important" />
+
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{livro.nome}" />
+					</p:column>
+					<p:column headerText="Autor">
+						<h:outputText value="#{livro.autor}" />
+					</p:column>
+					<p:column headerText="Páginas">
+						<h:outputText value="#{livro.paginas}" />
+					</p:column>
+					<p:column headerText="Quantidade em estoque">
+						<h:outputText value="#{livro.estoque}" />
 					</p:column>
 					<p:column headerText="Ações" style="text-align: center">
 						<p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro"
