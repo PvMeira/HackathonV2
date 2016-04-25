@@ -28,9 +28,12 @@
 						<p:message for="nome" />
 
 						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask id="cpf" requiredMessage="Campo obrigatório" placeholder="CPF"
-							mask="999.999.999-99" required="true"
-							value="#{pessoaManagedBean.pessoa.cpf}" />
+
+						<p:inputMask id="cpf" requiredMessage="Campo obrigatório"
+							value="#{funcionarioManagedBean.funcionario.cpf}">
+							<f:validator validatorId="cpfValidator" />
+						</p:inputMask>
+
 						<p:message for="cpf" />
 
 						<p:outputLabel for="telefone" value="Telefone:" />
